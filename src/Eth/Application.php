@@ -10,6 +10,6 @@ use EasyBlockchain\Kernel\ServiceContainer;
 class Application extends ServiceContainer
 {
     protected array $providers = [
-        Basic\ServiceProvider::class,
+        ServiceProvider::class,
     ];
 }
