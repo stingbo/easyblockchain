@@ -61,3 +61,46 @@ $data = $app->client->get("/v1/blocks/{$block_number}/events", [
 ], 'APIKEY');
 ```
 </details>
+
+### ETH
+<details>
+<summary><b> :rocket: Quick Start </b></summary>
+
+```php
+<?php
+
+use EasyBlockchain\Factory;
+
+$config = [
+    'eth' => [
+        'response_type' => 'array',
+        'base_uri' => 'http://127.0.0.1:8545',
+        'log' => [
+            'default' => 'dev', // 默认使用的 channel，生产环境可以改为下面的 prod
+            'channels' => [
+                'dev' => [ // 测试环境
+                    'driver' => 'daily',
+                    'path' => '/tmp/eth.log',
+                    'level' => 'debug',
+                    'days' => 60,
+                ],
+                'prod' => [ // 生产环境
+                    'driver' => 'daily',
+                    'path' => '/tmp/eth.log',
+                    'level' => 'debug',
+                    'days' => 90,
+                ],
+            ],
+        ],
+    ],
+];
+
+$app = Factory::eth($config['eth']);
+$result = $app->client->postJson('', [
+    'jsonrpc' => '2.0',
+    'method' => 'eth_accounts',
+    'params' => [],
+    'id' => 1,
+]);
+```
+</details>
